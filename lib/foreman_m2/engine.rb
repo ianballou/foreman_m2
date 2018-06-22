@@ -23,7 +23,7 @@ module ForemanM2
         requires_foreman '>= 1.16'
 
 				compute_resource M2
-				# parameter_filter ComputeResource, :api_token
+				parameter_filter ComputeResource, :url, :user, :password
 
         # Add permissions
         security_block :foreman_m2 do
