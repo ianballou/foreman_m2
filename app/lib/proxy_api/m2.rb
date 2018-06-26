@@ -6,9 +6,16 @@ module ProxyAPI
 		end
 
 		def get_images(args)
-			parse(get("image_list", args))
-		rescue => e
-			raise ProxyException.new(url, e, N_("Unable to get M2 images. args: " + args.inspect))
+			img_strings = parse(get("image_list", args))
+			#rescue => e
+			#raise ProxyException.new(url, e, N_("Unable to get M2 images. args: " + args.inspect))
+
+			imgs = []
+			img_strings.each do |img|
+				imgs << Image.new(:name => img)
+			end
+
+			return imgs
 		end
 	end
 end
