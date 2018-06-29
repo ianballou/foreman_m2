@@ -1,0 +1,7 @@
+# Proxy features
+[ "M2"].each do |input|
+  f = Feature.where(:name => input).first_or_create
+  raise "Unable to create proxy feature: #{format_errors f}" if f.nil? || f.errors.any?
+end
+
+

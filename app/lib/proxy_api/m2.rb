@@ -9,10 +9,12 @@ module ProxyAPI
 			img_strings = parse(get("image_list", args))
 			#rescue => e
 			#raise ProxyException.new(url, e, N_("Unable to get M2 images. args: " + args.inspect))
-
+			
+			id = 0
 			imgs = []
 			img_strings.each do |img|
-				imgs << Image.new(:name => img)
+				id += 1
+				imgs << Image.new(:id => id, :uuid => id, :name => img)
 			end
 
 			return imgs
