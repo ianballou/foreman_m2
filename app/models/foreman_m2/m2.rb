@@ -11,6 +11,7 @@ module ForemanM2
 
 		def available_images
 			proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
+			#proxy = ::ProxyAPI::M2.new(url: url)
 			proxy.get_images(:project => "bmi_infra")
 		end
 

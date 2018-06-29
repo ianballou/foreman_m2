@@ -6,7 +6,7 @@ module ProxyAPI
 		end
 
 		def get_images(args)
-			img_strings = parse(get("image_list", args))
+			img_strings = parse(get("image_list?project=#{args[:project]}"))
 			#rescue => e
 			#raise ProxyException.new(url, e, N_("Unable to get M2 images. args: " + args.inspect))
 			
@@ -18,6 +18,10 @@ module ProxyAPI
 			end
 
 			return imgs
+		end
+
+		def get_iscsi_target(args)
+			get("iscsi_target?project=#{args[:project]}&image=#{args[:image]}").body
 		end
 	end
 end
