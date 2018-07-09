@@ -12,7 +12,7 @@ module ForemanM2
 
 			proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
 			@response = proxy.get_images(:project => "bmi_infra")
-			@iscsi = proxy.get_iscsi_target(:project => "bmi_infra", :image => "centos7")
+			@iscsi_target = proxy.get_iscsi_target(:project => "bmi_infra", :image => "centos7")
     end
   end
 end
