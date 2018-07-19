@@ -1,8 +1,9 @@
 <h2>Nothing to see here!</h2>
 
 <%
-	arch ||= nil ; os ||= nil
-	images = possible_images(compute_resource, arch, os)
+    arch ||= nil ; os ||= nil
+    #compute_resource = ComputeResource.find_by name: "mustard"
+    images = possible_images(compute_resource, arch, os)
 -%>
 
 <div id='image_selection'>

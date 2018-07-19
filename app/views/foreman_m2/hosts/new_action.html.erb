@@ -4,8 +4,16 @@ Welcome to <b>ForemanM2</b>
   <strong>M2 Images Available:</strong>
   <% @response.each do |t| %>
     <%= t %></li>
-<% end %>
+  <% end %>
+  <br>
 
   <strong>M2 iSCSI GET test:</strong>
   <%= @iscsi_target %>
+  <br>
+
+  <strong>M2 Snapshots:</strong>
+  <% @snaps.each do |t| %>
+    <%= t %></li>
+  <% end %>
+  <br>
 </p>

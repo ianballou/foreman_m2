@@ -17,7 +17,7 @@ module ForemanM2
 
 		def client
 			# XXX TOTAL SPOOF
-			@client = Fog::Compute.new(:provider => "Libvirt", :libvirt_uri => 'qemu:///system')
+			#@client = Fog::Compute.new(:provider => "Libvirt", :libvirt_uri => 'qemu:///system')
 		end
 
 	end

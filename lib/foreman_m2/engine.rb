@@ -48,8 +48,10 @@ module ForemanM2
     # Include concerns in this config.to_prepare block
     config.to_prepare do
       begin
+        ComputeResource.send(:prepend, ForemanM2::ComputeResourceExtensions)
         Host::Managed.send(:include, ForemanM2::HostExtensions)
         HostsHelper.send(:include, ForemanM2::HostsHelperExtensions)
+        #::Host::Managed.send(:include, ForemanM2::Concerns::ComputeOrchestrationExtensions)
       rescue => e
         Rails.logger.warn "ForemanM2: skipping engine hook (#{e})"
       end
