@@ -2,8 +2,11 @@ module ForemanM2
   module HostExtensions
     extend ActiveSupport::Concern
 
+
     included do
       # execute callbacks
+      #before_destroy :destroy_disk, :if => compute_resource.type == "ForemanM2::M2"
+      before_destroy :destroy_disk
     end
 
     # create or overwrite instance methods...
@@ -14,14 +17,23 @@ module ForemanM2
       false
     end
 		
-		class ::Host::Managed::Jail < Safemode::Jail
-			allow :iscsi_target
-		end
+    class ::Host::Managed::Jail < Safemode::Jail
+      allow :iscsi_target
+    end
 
-		def iscsi_target
+    def iscsi_target
+      proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
+      img = Image.find_by name: image_name
+      project = img.uuid
+			proxy.get_iscsi_target(:project => project, :disk => name, :image => image_name)
+    end
+
+    def destroy_disk
+      logger.info "Destroying disk #{name}"
 			proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
-			proxy.get_iscsi_target(:project => "bmi_infra", :image => image_name)
-		end
+      proxy.delete_iscsi_target(:disk => name)
+    end
+
 
     module ClassMethods
       # create or overwrite class methods...
