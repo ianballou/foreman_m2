@@ -1,0 +1,3 @@
+<%= action_buttons(link_to(_('Edit'), edit_compute_resource_image_path(@compute_resource, image)),
+                   link_to(_('Snapshot'), edit_compute_resource_image_path(@compute_resource, image)),
+                   link_to(_('Destroy'), [@compute_resource, image], :data => { :confirm => _('Are you sure?') }, :method => :delete)) %>
