@@ -50,6 +50,8 @@ module ForemanM2
       begin
         ComputeResource.send(:prepend, ForemanM2::ComputeResourceExtensions)
         Host::Managed.send(:include, ForemanM2::HostExtensions)
+        Host::Managed.send(:prepend, ForemanM2::HostOrchestrationExtensions)
+        Host::Managed.send(:prepend, ForemanM2::NicOrchestrationExtensions)
         HostsHelper.send(:include, ForemanM2::HostsHelperExtensions)
         #::Host::Managed.send(:include, ForemanM2::Concerns::ComputeOrchestrationExtensions)
       rescue => e
