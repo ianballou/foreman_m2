@@ -42,6 +42,8 @@ module ForemanM2
 
         # add dashboard widget
         widget 'foreman_m2_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
+
+        provision_method 'hybrid_build', 'Network & Image Based'
       end
     end
 
@@ -49,7 +51,8 @@ module ForemanM2
     config.to_prepare do
       begin
         ComputeResource.send(:prepend, ForemanM2::ComputeResourceExtensions)
-        Host::Managed.send(:include, ForemanM2::HostExtensions)
+        Host::Managed.send(:prepend, ForemanM2::HostExtensions)
+        Host::Managed.send(:prepend, ForemanM2::NicExtensions)
         Host::Managed.send(:prepend, ForemanM2::HostOrchestrationExtensions)
         Host::Managed.send(:prepend, ForemanM2::NicOrchestrationExtensions)
         HostsHelper.send(:include, ForemanM2::HostsHelperExtensions)

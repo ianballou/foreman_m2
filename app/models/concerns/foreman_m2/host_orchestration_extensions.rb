@@ -1,5 +1,5 @@
 module ForemanM2
-  module HostExtensions
+  module HostOrchestrationExtensions
     extend ActiveSupport::Concern
 
 

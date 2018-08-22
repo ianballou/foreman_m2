@@ -24,14 +24,6 @@ module ForemanM2
       allow :iscsi_target, :hybrid_build?, :image_name
     end
 
-    def self.provision_methods
-      {
-        'build' => N_('Network Based'),
-        'image' => N_('Image Based'),
-        'hybrid' => N_('Image Based Network')
-      }.merge(registered_provision_methods)
-    end
-
     def can_be_built?
       managed? && SETTINGS[:unattended] && (pxe_build? || hybrid_build?) && !build?
     end
