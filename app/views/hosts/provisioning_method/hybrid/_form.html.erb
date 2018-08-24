@@ -1,0 +1,6 @@
+<div id='hybrid_provisioning' <%= display? !@host.hybrid_build? %> >
+  <%= render "common/os_selection/image_details", {:item => @host} %>
+  <% if host.operatingsystem %>
+    <%= render "common/os_selection/pxe_loader", {:item => @host} %>
+  <% end %>
+</div>

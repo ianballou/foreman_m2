@@ -70,8 +70,8 @@ module ForemanM2
     def iscsi_target
       proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
       img = Image.find_by name: image_name
-      project = img.uuid
-			proxy.get_iscsi_target(:project => project, :disk => name, :image => image_name)
+      #project = img.uuid
+			proxy.get_iscsi_target(:disk => name, :image => image_name)
     end
 
     def destroy_disk

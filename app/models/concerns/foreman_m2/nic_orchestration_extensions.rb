@@ -5,14 +5,19 @@ module ForemanM2
 
     included do
       # execute callbacks
+      delegate :hybrid_build?, :to => :host
     end
 
     # create or overwrite instance methods...
+    
+    #def hybrid_build?
+    #  self.provision_method == 'hybrid'
+    #end
 
     def tftp_ready?
       # host.managed? and managed? should always come first so that orchestration doesn't
       # even get tested for such objects
-      (host.nil? || host.managed?) && managed && provision? && (host&.operatingsystem && host.pxe_loader.present?) && (pxe_build? || hybrid_build?) && SETTINGS[:unattended]
+      (host.nil? || host.managed?) && managed && provision? && (host&.operatingsystem && host.pxe_loader.present?) && (pxe_build? || host.hybrid_build?) && SETTINGS[:unattended]
     end
     
     def generate_pxe_template(kind)
