@@ -1,0 +1,22 @@
+#!gpxe
+<%#
+kind: iPXE
+name: M2 default iPXE
+model: ProvisioningTemplate
+oses:
+-All
+%>
+<% subnet = @host.subnet -%>
+<% if subnet.respond_to?(:dhcp_boot_mode?) && subnet.dhcp_boot_mode? -%>
+  <% static = '' -%>
+<% else -%>
+  <% static_arg = 'static=yes' -%>
+  <% static = (@host.token.nil? ? '?' : '&') + static_arg -%>
+<% end -%>
+
+# Assuming we're using the M2 PXELinux BIOS template...
+
+#sleep 23
+set keep-san 1
+sanboot --keep <%= @host.iscsi_target %> || shell
+boot
