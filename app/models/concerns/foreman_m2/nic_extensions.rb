@@ -1,19 +1,14 @@
 module ForemanM2
-  module ComputeResourceExtensions
+  module NicExtensions
     extend ActiveSupport::Concern
-
-    attr_accessor :image_id
 
     included do
       # execute callbacks
+      # before_destroy :destroy_disk, :if => compute_resource.type == "ForemanM2::M2"
+      delegate :hybrid_build?, :to => :host
     end
 
     # create or overwrite instance methods...
-    def instance_method_name; end
-
-    def new_vm(_attr = {})
-      self
-    end
 
     module ClassMethods
       # create or overwrite class methods...

@@ -1,0 +1,85 @@
+<script>
+function os_selected(element){
+  var url = $(element).attr('data-url');
+  var type = $(element).attr('data-type');
+  var attrs = {};
+  attrs[type] = attribute_hash(tfm.hosts.getAttributesToPost("os"));
+  tfm.tools.showSpinner();
+  $.ajax({
+    data: attrs,
+    type:'post',
+    url: url,
+    complete: function(){
+      reloadOnAjaxComplete(element);
+    },
+    success: function(request) {
+      $('#media_select').html(request);
+      reload_host_params();
+      reload_puppetclass_params();
+      hybrid_hide_build_fields()
+    }
+  });
+  update_provisioning_image();
+}
+
+function hybrid_provision_method_selected() {
+  $('#image_provisioning').show();
+  $('#network_provisioning').show();
+  $('div[id*=media_selection]').hide();
+  $('div[id*=custom_ptable]').hide();
+  $('#network_selection select').attr('disabled', false);
+  var image_options = $('#image_selection select');
+  image_options.attr('disabled', false);
+  $('#image_selection select').show();
+  if ($('#provider').val() == 'Libvirt') {
+    tfm.computeResource.libvirt.imageSelected(image_options);
+  } else if ($('#provider').val() == 'Ovirt') {
+    var template_options = $('#host_compute_attributes_template');
+    if (template_options.length > 0) {
+      template_options.attr('disabled', true);
+      template_options.val(image_options.val());
+      tfm.computeResource.ovirt.templateSelected(image_options);
+    }
+  }
+}
+$(document).on('change', '#host_provision_method_hybrid', hybrid_provision_method_selected);
+function hybrid_hide_build_fields() {
+  if ($('#host_provision_method_hybrid')[0].checked) {
+    $('#network_provisioning').show();
+    $('div[id*=media_selection]').hide();
+    $('div[id*=custom_ptable]').hide();
+  }
+}
+$(document).on('change', '#host_operatingsystem_id', hybrid_hide_build_fields);
+
+function build_provision_method_selected() {
+  $('div[id*=_provisioning]').hide();
+  $('#network_provisioning').show();
+  $('div[id*=custom_ptable]').show();
+  $('div[id*=media_selection]').show();
+  $('#image_selection select').attr('disabled', true);
+  if ($('#provider').val() == 'Ovirt')
+    $('#host_compute_attributes_template').attr('disabled', false);
+ }
+$(document).on('change', '#host_provision_method_build', build_provision_method_selected);
+
+function image_provision_method_selected() {
+  $('div[id*=_provisioning]').hide();
+  $('div[id*=media_selection]').hide();
+  $('#image_provisioning').show();
+  $('#network_selection select').attr('disabled', true);
+  var image_options = $('#image_selection select');
+   image_options.attr('disabled', false);
+   if ($('#provider').val() == 'Libvirt') {
+     tfm.computeResource.libvirt.imageSelected(image_options);
+   } else if ($('#provider').val() == 'Ovirt') {
+     var template_options = $('#host_compute_attributes_template');
+     if (template_options.length > 0) {
+       template_options.attr('disabled', true);
+       template_options.val(image_options.val());
+       tfm.computeResource.ovirt.templateSelected(image_options);
+     }
+   }
+ }
+$(document).on('change', '#host_provision_method_image', image_provision_method_selected);
+</script>

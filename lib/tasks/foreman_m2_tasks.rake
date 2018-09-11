@@ -31,7 +31,7 @@ namespace :foreman_m2 do
                          "#{ForemanM2::Engine.root}/lib/**/*.rb",
                          "#{ForemanM2::Engine.root}/test/**/*.rb"]
       end
-    rescue
+    rescue StandardError
       puts 'Rubocop not loaded.'
     end
 

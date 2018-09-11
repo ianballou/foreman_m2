@@ -1,6 +1,6 @@
 module ForemanM2
-	#class BareMetalM2 < ComputeResource
-	#end
+  # class BareMetalM2 < ComputeResource
+  # end
 
   class Engine < ::Rails::Engine
     engine_name 'foreman_m2'
@@ -22,8 +22,8 @@ module ForemanM2
       Foreman::Plugin.register :foreman_m2 do
         requires_foreman '>= 1.16'
 
-				compute_resource M2
-				parameter_filter ComputeResource, :url, :user, :password
+        compute_resource M2
+        parameter_filter ComputeResource, :url, :user, :password
 
         # Add permissions
         security_block :foreman_m2 do
@@ -42,6 +42,8 @@ module ForemanM2
 
         # add dashboard widget
         widget 'foreman_m2_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
+
+        provision_method 'hybrid', 'Network & Image Based'
       end
     end
 
@@ -49,10 +51,14 @@ module ForemanM2
     config.to_prepare do
       begin
         ComputeResource.send(:prepend, ForemanM2::ComputeResourceExtensions)
-        Host::Managed.send(:include, ForemanM2::HostExtensions)
+        Host::Managed.send(:prepend, ForemanM2::HostExtensions)
+        Nic::Managed.send(:prepend, ForemanM2::NicOrchestrationExtensions)
+        Nic::Managed.send(:prepend, ForemanM2::NicExtensions)
+        Host::Managed.send(:prepend, ForemanM2::HostOrchestrationExtensions)
         HostsHelper.send(:include, ForemanM2::HostsHelperExtensions)
+        ImagesHelper.send(:prepend, ForemanM2::ImagesHelperExtensions)
         #::Host::Managed.send(:include, ForemanM2::Concerns::ComputeOrchestrationExtensions)
-      rescue => e
+      rescue StandardError => e
         Rails.logger.warn "ForemanM2: skipping engine hook (#{e})"
       end
     end
@@ -64,7 +70,7 @@ module ForemanM2
     end
 
     initializer 'foreman_m2.register_gettext', after: :load_config_initializers do |_app|
-      locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
+      locale_dir = File.join(File.expand_path('../..', __dir__), 'locale')
       locale_domain = 'foreman_m2'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
