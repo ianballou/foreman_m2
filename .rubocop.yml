@@ -1,23 +1,106 @@
+inherit_from:
+  - .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'doc/plugins/**'
+
 Rails:
   Enabled: true
+
+Rails/Date:
+  Enabled: false
 
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false
 
-# Force before_filter until upgrade to Rails 4
-Rails/ActionFilter:
-  EnforcedStyle: filter
-
 Metrics/MethodLength:
-  Max: 20
+  Max: 40
 
-Metrics/LineLength:
-  Max: 111 # TODO: discuss and set this
-
-Style/Next:
+Style/TrailingCommaInArrayLiteral:
   Enabled: false
 
-# Support both ruby19 and hash_rockets
-Style/HashSyntax:
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 500
+  Exclude:
+       - 'test/**/*'
+
+Naming/FileName:
+  Exclude:
+      - 'db/seeds.d/*'
+
+Style/WordArray:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+       - 'config/routes.rb'
+       - 'test/**/*'
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+# a == 0 is not the same as a.zero?, when a is not a number
+Style/NumericPredicate:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 11
+
+Metrics/AbcSize:
+  Max: 45
+
+Style/FrozenStringLiteralComment:
   Enabled: false
