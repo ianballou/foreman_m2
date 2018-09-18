@@ -6,12 +6,13 @@ Gem::Specification.new do |s|
   s.license     = 'GPL-3.0'
   s.authors     = ['Ian Ballou']
   s.email       = ['iballou@redhat.com']
-  s.homepage    = 'https://github.com/Izhmash'
-  s.summary     = 'Summary'
+  s.homepage    = 'https://github.com/ianballou/foreman_m2'
+  s.summary     = %q{M2 bare metal provisioning plugin for Foreman}
   # also update locale/gemspec.rb
-  s.description = 'Description'
+  s.description = 'M2 bare metal provisioning plugin for Foreman'
 
-  s.files = Dir['{app,config,db,lib,locale}/**/*'] + ['LICENSE', 'Rakefile', 'README.md']
+  s.files = Dir['{app,config,db,lib,locale}/**/*'] +
+    ['LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
   s.add_development_dependency 'rdoc'

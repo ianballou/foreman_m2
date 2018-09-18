@@ -18,7 +18,8 @@ module ForemanM2
       end
     end
 
-    initializer 'foreman_m2.register_plugin', :before => :finisher_hook do |_app|
+    initializer 'foreman_m2.register_plugin',
+                :before => :finisher_hook do |_app|
       Foreman::Plugin.register :foreman_m2 do
         requires_foreman '>= 1.16'
 
@@ -41,7 +42,8 @@ module ForemanM2
              after: :hosts
 
         # add dashboard widget
-        widget 'foreman_m2_widget', name: N_('Foreman plugin template widget'), sizex: 4, sizey: 1
+        widget 'foreman_m2_widget', name: N_('Foreman plugin template widget'),
+                                    sizex: 4, sizey: 1
 
         provision_method 'hybrid', 'Network & Image Based'
       end
@@ -57,7 +59,6 @@ module ForemanM2
         Host::Managed.send(:prepend, ForemanM2::HostOrchestrationExtensions)
         HostsHelper.send(:include, ForemanM2::HostsHelperExtensions)
         ImagesHelper.send(:prepend, ForemanM2::ImagesHelperExtensions)
-        #::Host::Managed.send(:include, ForemanM2::Concerns::ComputeOrchestrationExtensions)
       rescue StandardError => e
         Rails.logger.warn "ForemanM2: skipping engine hook (#{e})"
       end
@@ -69,7 +70,8 @@ module ForemanM2
       end
     end
 
-    initializer 'foreman_m2.register_gettext', after: :load_config_initializers do |_app|
+    initializer 'foreman_m2.register_gettext',
+                after: :load_config_initializers do |_app|
       locale_dir = File.join(File.expand_path('../..', __dir__), 'locale')
       locale_domain = 'foreman_m2'
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
