@@ -22,7 +22,7 @@ for how to install Foreman plugins
 
 ## TODO
 
-- Fix M2 image deletion when destroying a host
+- Testing
 - Disk management interface in Foreman
 
 ## Contributing
