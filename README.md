@@ -6,7 +6,7 @@ The Foreman M2 plugin introduces M2 functionality into Foreman.  This is current
 
 - TFTP & DHCP servers
 - Smart-Proxy plugin that has M2 among its capabilities (see link above)
-- Note: For now, ensure that the M2 smart proxy is called "proxy_m2".  This will be addressed in the next release.
+- Note: In 0.0.1, ensure that the M2 smart proxy is called "proxy_m2".  This will be addressed in the next release.
 - Working M2 installation with images imported to the M2 project in use
 
 ## Installation
