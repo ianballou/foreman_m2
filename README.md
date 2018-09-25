@@ -1,6 +1,6 @@
 # Foreman M2
 
-The Foreman M2 plugin introduces M2 functionality into Foreman.  This is currently in-progress.  Related: https://github.com/Izhmash/smart_proxy_m2
+The Foreman M2 plugin introduces M2 functionality into Foreman.  This is currently in-progress.  Related: https://github.com/ianballou/smart_proxy_m2
 
 ## Pre-requirements
 
