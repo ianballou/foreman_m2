@@ -10,7 +10,7 @@ module ForemanM2
     def new_action
       # automatically renders view/foreman_m2/hosts/new_action
 
-      proxy = SmartProxy.find_by name: 'proxy_m2'
+      proxy = ::ProxyAPI::M2.new(url: SmartProxy.with_features('M2').first.url)
       proxyAPI = ::ProxyAPI::M2.new(url: proxy.url)
       @response = proxyAPI.get_images(:project => 'ian')
       @snaps = proxyAPI.get_snapshots(:project => 'ian')
