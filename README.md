@@ -24,7 +24,7 @@ for how to install Foreman plugins
 ## TODO
 
 - Query for M2 smart proxy by some method other than its name
-  - Fix will be out in latest release
+  - Fix will be out in next release
 - Testing
 - Disk management interface in Foreman
 
