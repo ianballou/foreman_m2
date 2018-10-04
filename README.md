@@ -28,6 +28,10 @@ for how to install Foreman plugins
 - Testing
 - Disk management interface in Foreman
 
+## Known issues
+- SSH orchestration attempts after host creation sometimes delay the generation of PXE boot files if there aren't enough server workers
+  - Try 5 workers
+
 ## Contributing
 
 Fork and send a Pull Request. Thanks!
