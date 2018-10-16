@@ -19,8 +19,8 @@ for how to install Foreman plugins
 1) Create an M2 compute resource
 2) Relate M2 provisioning templates to the M2 computer resource
 3) Create M2 images in the M2 compute resource
-NOTE: For now, ensure that the entered image name matches the one in the drop-down menu.
-4) Create host using M2 provider  **Note: make sure to select "Network & Image Based" provisioning method
+**NOTE: For now, ensure that the entered image name matches the one in the drop-down menu.**
+4) Create host using M2 provider  **Note: make sure to select "Network & Image Based" provisioning method.**
 
 ## TODO
 
