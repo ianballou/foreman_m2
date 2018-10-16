@@ -88,16 +88,21 @@ module ForemanM2
 
     def iscsi_target
       logger.info "Creating disk #{name}"
-      proxy = SmartProxy.find_by name: 'proxy_m2'
+      proxy = SmartProxy.find_by url: self.compute_resource.url
       proxyAPI = ::ProxyAPI::M2.new(url: proxy.url)
       img = Image.find_by name: image_name
-      # project = img.uuid
-      proxyAPI.get_iscsi_target(:disk => name, :image => image_name)
+      tgt = proxyAPI.get_iscsi_target(:disk => name, :image => image_name)
+      # If M2 returns that the image exists...
+      if tgt.include? "exists"
+        tgt.slice! "Disk exists. Endpoint:"
+        tgt
+      end
+
     end
 
     def destroy_disk
       logger.info "Destroying disk #{name}"
-      proxy = SmartProxy.find_by name: 'proxy_m2'
+      proxy = SmartProxy.find_by url: self.compute_resource.url
       proxyAPI = ::ProxyAPI::M2.new(url: proxy.url)
       proxyAPI.delete_iscsi_target(:disk => name)
     end
