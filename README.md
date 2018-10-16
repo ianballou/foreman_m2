@@ -6,7 +6,7 @@ The Foreman M2 plugin introduces M2 functionality into Foreman.  This is current
 
 - TFTP & DHCP servers
 - Smart-Proxy plugin that has M2 among its capabilities (see link above)
-- Note: In 0.0.1, ensure that the M2 smart proxy is called "proxy_m2".  This will be addressed in the next release.
+- Note: In 0.0.1 & 0.0.2, ensure that the M2 smart proxy is called "proxy_m2".  This will be addressed in the next release.
 - Working M2 installation with images imported to the M2 project in use
 
 ## Installation
@@ -19,6 +19,7 @@ for how to install Foreman plugins
 1) Create an M2 compute resource
 2) Relate M2 provisioning templates to the M2 computer resource
 3) Create M2 images in the M2 compute resource
+NOTE: For now, ensure that the entered image name matches the one in the drop-down menu.
 4) Create host using M2 provider  **Note: make sure to select "Network & Image Based" provisioning method
 
 ## TODO
