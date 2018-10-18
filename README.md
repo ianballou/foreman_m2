@@ -15,6 +15,8 @@ The Foreman M2 plugin introduces M2 functionality into Foreman.  This is current
 See [How_to_Install_a_Plugin](http://projects.theforeman.org/projects/foreman/wiki/How_to_Install_a_Plugin)
 for how to install Foreman plugins
 
+Be sure to run `rake db:seed` to seed the database.
+
 ## Usage
 
 1) Create an M2 compute resource
