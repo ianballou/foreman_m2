@@ -1,1 +1,2 @@
-<%= text_f f, :url, :label => _("M2 Smart Proxy URL") %>
+<%= select_f f, :url, SmartProxy.all.each { |sp| sp.features.include? "M2" },
+  :url, :name, {}, {:label => _('M2 Smart Proxy URL'), :required => true} %>

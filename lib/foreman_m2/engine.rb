@@ -31,19 +31,8 @@ module ForemanM2
           permission :view_foreman_m2, :'foreman_m2/hosts' => [:new_action]
         end
 
-        # Add a new role called 'Discovery' if it doesn't exist
+        # Add a new role called 'ForemanM2' if it doesn't exist
         role 'ForemanM2', [:view_foreman_m2]
-
-        # add menu entry
-        menu :top_menu, :template,
-             url_hash: { controller: :'foreman_m2/hosts', action: :new_action },
-             caption: 'ForemanM2',
-             parent: :hosts_menu,
-             after: :hosts
-
-        # add dashboard widget
-        widget 'foreman_m2_widget', name: N_('Foreman plugin template widget'),
-                                    sizex: 4, sizey: 1
 
         provision_method 'hybrid', 'Network & Image Based'
       end
